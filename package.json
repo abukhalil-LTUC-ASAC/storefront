@@ -1,0 +1,38 @@
+{
+  "name": "storefront",
+  "version": "1.0.0",
+  "description": "React-Redux with material UI elements",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "CHOKIDAR_USEPOLLING=1 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "author": "Yahya Abu Khalil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abukhalil-LTUC-ASAC/storefront/issues"
+  },
+  "dependencies": {
+    "node-sass": "^4.14.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.1",
+    "react-scripts": "^4.0.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
