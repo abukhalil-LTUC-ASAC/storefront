@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import { addCart, removeCart } from '../../store/';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -61,12 +62,13 @@ const Products = props => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={()=> props.addCart(card)}>
                   ADD TO CART
                 </Button>
                 <Button size="small" color="primary">
                   VIEW DETAILS
                 </Button>
+                {card.inventory}
               </CardActions>
             </Card>
           </Grid>
@@ -76,15 +78,11 @@ const Products = props => {
   )
 }
 
-// {.map((product, index) => {
-//   return <div key={index}>
-//     <h3> {product.name}</h3>
-//     <p>{product.description}</p> <span>{product.price}</span>
-//   </div>
-// })}
-
 const mapStateToProps = state => ({
   products: state.products
 })
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = { addCart, removeCart };
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

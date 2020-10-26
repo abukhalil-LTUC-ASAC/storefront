@@ -32,20 +32,28 @@ const Categories = props => {
       <div className={classes.title}>Browse our Categories</div>
       <div className={classes.allCategories}>
         {Object.keys(props.category.allCategories).map(function(key, index) {
-          return (<>
+          return (
             <p key={key}>
               <Link href='#' color="inherit" onClick={()=> props.change(key)} className={classes.category}>{props.category.allCategories[key].displayName}</Link>
             </p>
-          </>)
+          )
         })}
       </div>
       <ActiveCategory category={props.category.activeCategory} className={classes.centerBody}/>
+      {props.cart.inventory.map(function(product, index) {
+          return (
+            <p key={index}>
+              {product.name}
+            </p>
+          )
+        })}
     </section>
   )
 }
 
 const mapStateToProps = state => ({
   category: state.categories,
+  cart: state.cart
 })
 
 const mapDispatchToProps = { change };

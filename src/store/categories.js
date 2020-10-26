@@ -13,7 +13,7 @@ const initialState = {
 export default (state = initialState, action) => {
   const {type, payload} = action;
   switch(type) {
-    case 'Change':
+    case 'ChangeCat':
       console.log(payload, state.allCategories[payload]);
       return {...state, activeCategory: state.allCategories[payload]};
 
