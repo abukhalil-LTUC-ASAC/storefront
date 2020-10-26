@@ -1,6 +1,9 @@
 const initialState = {
-  products: [
-    {category: 'Asa', name: 'Msa', description: 'psa', price: '123', inventory: 1},
+  allProducts: [
+    {category: 'asa', name: 'asaAff', description: 'psa', price: '123', inventory: 1},
+    {category: 'kpa', name: 'kpaAff', description: 'psa', price: '123', inventory: 1},
+    {category: 'kpa', name: 'kpaAff', description: 'psa', price: '123', inventory: 1},
+    {category: 'asa', name: 'asaAff', description: 'psa', price: '123', inventory: 1},
   ],
   displayedProducts: []
 }
@@ -14,9 +17,7 @@ export default (state = initialState, action) => {
   switch(type) {
 
     case 'Change':
-      let displayedProducts = state.products.filter(product => {
-        return product.category === payload;
-      })
+      let displayedProducts = filterProducts(state.allProducts, payload);
       return {...state, displayedProducts};
 
     default:
@@ -24,3 +25,7 @@ export default (state = initialState, action) => {
 
   }
 } 
+
+const filterProducts = (products, choice) => {
+  return products.filter(product => product.category === choice);
+}

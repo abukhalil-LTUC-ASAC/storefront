@@ -10,3 +10,10 @@ const store = () => {
 }
 
 export default store();
+
+export const change = (name) =>{
+    return {
+        type: 'Change',
+        payload: name
+    }
+}

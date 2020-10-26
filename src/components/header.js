@@ -1,5 +1,9 @@
+import HeaderComp from './material-ui/headerComp';
+
 export default () => {
   return (
-    <div>This is my store</div>
+    <div>    
+      <HeaderComp/>
+    </div>
   )
 }
