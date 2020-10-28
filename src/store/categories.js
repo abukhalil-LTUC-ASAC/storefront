@@ -12,8 +12,9 @@ const initialState = {
 // Reducer
 export default (state = initialState, action) => {
   const {type, payload} = action;
+  console.log("categories ----------> :", state);
   switch(type) {
-    case 'Change':
+    case 'ChangeCat':
       console.log(payload, state.allCategories[payload]);
       return {...state, activeCategory: state.allCategories[payload]};
 

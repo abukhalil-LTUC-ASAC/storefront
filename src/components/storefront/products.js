@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import { addCart, removeCart } from '../../store/';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -10,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,12 +61,13 @@ const Products = props => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={()=> props.addCart(card)}>
                   ADD TO CART
                 </Button>
                 <Button size="small" color="primary">
                   VIEW DETAILS
                 </Button>
+                {card.inventory}
               </CardActions>
             </Card>
           </Grid>
@@ -76,15 +77,11 @@ const Products = props => {
   )
 }
 
-// {.map((product, index) => {
-//   return <div key={index}>
-//     <h3> {product.name}</h3>
-//     <p>{product.description}</p> <span>{product.price}</span>
-//   </div>
-// })}
-
 const mapStateToProps = state => ({
   products: state.products
 })
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = { addCart };
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

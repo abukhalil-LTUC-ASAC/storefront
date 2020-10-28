@@ -27,7 +27,6 @@ export default () => {
 
   return (
     <div>
-      {/* Footer */}
       <footer className={classes.footer}>
       <Typography variant="h6" align="center" gutterBottom>
         Footer
@@ -37,7 +36,6 @@ export default () => {
       </Typography>
       <Copyright />
       </footer>
-      {/* End footer */}
     </div>
   )
 }
