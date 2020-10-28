@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { change } from '../../store/';
+import { change, removeCart } from '../../store/';
 import ActiveCategory from './current-category';
+
 import { makeStyles } from "@material-ui/core/styles";
 import Link from '@material-ui/core/Link';
 
@@ -42,8 +43,8 @@ const Categories = props => {
       <ActiveCategory category={props.category.activeCategory} className={classes.centerBody}/>
       {props.cart.inventory.map(function(product, index) {
           return (
-            <p key={index}>
-              {product.name}
+            <p key={index} onClick={()=> props.removeCart(product)}>
+              {product.name + '  ' + product.cart}
             </p>
           )
         })}
@@ -56,6 +57,6 @@ const mapStateToProps = state => ({
   cart: state.cart
 })
 
-const mapDispatchToProps = { change };
+const mapDispatchToProps = { change, removeCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories); 

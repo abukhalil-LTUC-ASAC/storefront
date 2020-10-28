@@ -1,6 +1,9 @@
 
 import React from "react";
+import { connect } from 'react-redux'
+
 import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +12,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import Badge from '@material-ui/core/Badge';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +28,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MenuAppBar() {
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}))(Badge);
+
+
+const Header = (props) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -52,6 +68,11 @@ export default function MenuAppBar() {
           </Typography>
           {auth && (
             <div>
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={props.cart.inventory.length} color="secondary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              </IconButton>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -89,3 +110,9 @@ export default function MenuAppBar() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  cart: state.cart
+})
+
+export default connect(mapStateToProps)(Header); 

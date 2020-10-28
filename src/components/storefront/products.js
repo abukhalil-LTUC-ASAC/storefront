@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +81,7 @@ const mapStateToProps = state => ({
   products: state.products
 })
 
-const mapDispatchToProps = { addCart, removeCart };
+const mapDispatchToProps = { addCart };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
