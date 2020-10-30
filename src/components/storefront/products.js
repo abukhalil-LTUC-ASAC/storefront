@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
-import { addCart, removeCart } from '../../store/';
+import { addCart, getRemoteData } from '../../store/';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Products = props => {
   const classes = useStyles();
+
+  useEffect(() => {
+    props.get();
+  }, [])
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
@@ -81,7 +85,10 @@ const mapStateToProps = state => ({
   products: state.products
 })
 
-const mapDispatchToProps = { addCart };
+const mapDispatchToProps = (dispatch, getState) => ({ 
+  get: ()=> dispatch(getRemoteData('products')),
+  addCart: (input)=> dispatch(addCart(input)),
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
