@@ -13,21 +13,26 @@ const initialState = {
 export default (state = initialState, action) => {
 
   const {type, payload, product} = action;
-  let changedProduct;
   console.log(payload);
   console.log("products ----------> :", state);
 
   switch(type) {
+ 
     case 'ChangeCat':
-      let displayedProducts = filterProductsCat(state.allProducts, payload);
+      let displayedProducts = filterProductsCat(state.allProducts, payload[0]);
+      console.log("filtered products----------> :", displayedProducts, payload[0]);
       return {...state, displayedProducts};
+
+    case 'GET.P':
+      return {...state, allProducts: payload.results};
+  
 
     case 'AddCart':
         if (product.inventory > 0) {
           let allProducts = incrementDecrement(state.allProducts, product.name, true);
         return {...state, allProducts};
         }
-        return {...state}
+        return {...state};
 
     case 'RemoveCart':
       if (product.cart > 0) {

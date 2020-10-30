@@ -26,7 +26,7 @@ const activeCategory = props => {
   return (
     
     <article className={classes.centerBody}>
-      <div className={classes.centerTitle}>{props.category.displayName}</div>
+      <div className={classes.centerTitle}>{props.category.display_name}</div>
       <div className={classes.centerText}>{props.category.description}</div>
     </article>
   )
