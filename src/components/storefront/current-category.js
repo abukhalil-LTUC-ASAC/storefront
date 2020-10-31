@@ -1,5 +1,6 @@
 
 import { makeStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   centerBody: {
@@ -32,4 +33,4 @@ const activeCategory = props => {
   )
 }
 
-export default activeCategory; 
+export default withRouter(activeCategory); 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { addCart, getRemoteData } from '../../store/';
+import { withRouter } from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -91,4 +92,4 @@ const mapDispatchToProps = (dispatch, getState) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Products));

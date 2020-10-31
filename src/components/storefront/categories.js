@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import {connect} from 'react-redux'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { change, removeCart, getRemoteData } from '../../store/';
 import ActiveCategory from './current-category';
+import { withRouter } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Link from '@material-ui/core/Link';
@@ -46,13 +47,13 @@ const Categories = props => {
       </div>
       {console.log('props.category.activeCategory', props.category.activeCategory)}
       <ActiveCategory category={props.category.activeCategory} className={classes.centerBody}/>
-      {props.cart.inventory.map(function(product, index) {
+      {/* {props.cart.inventory.map(function(product, index) {
           return (
             <p key={index} onClick={()=> props.removeCart(product)}>
               {product.name + '  ' + product.cart}
             </p>
           )
-        })}
+        })} */}
     </section>
   )
 }
@@ -69,4 +70,4 @@ const mapDispatchToProps = (dispatch, getState) => ({
   removeCart: (input)=> dispatch(removeCart(input)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories); 
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Categories)); 
