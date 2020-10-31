@@ -25,15 +25,3 @@ export default (state = initialState, action) => {
       return state;
   }
 }
-
-// switch(type) {
-
-//   case 'Change':
-//     let categories = state.categories;
-//     let activeCategory = categories[payload];
-//     return {activeCategory, categories};
-
-//   default:
-//     return state;
-
-// }

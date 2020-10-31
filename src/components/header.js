@@ -1,20 +1,19 @@
 
 import React from "react";
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 
+import MenuButton from './common/menuButton';
 import { makeStyles } from "@material-ui/core/styles";
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Badge from '@material-ui/core/Badge';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import IconButton from '@material-ui/core/IconButton';
 
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,80 +27,35 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const StyledBadge = withStyles((theme) => ({
-  badge: {
-    right: -3,
-    top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
-    padding: '0 4px',
-  },
-}))(Badge);
-
-
 const Header = (props) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
   const handleLogin = (event) => {
     setAuth(!auth);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
             OUR STORE
           </Typography>
+          <div style={{display: 'flex'}}>
+          <IconButton color="inherit" aria-label="add to shopping cart" component={Link} to={'/'}>
+            <HomeIcon/>
+          </IconButton>
           {auth && (
-            <div>
-              <IconButton aria-label="cart">
-                <StyledBadge badgeContent={props.cart.inventory.length} color="secondary">
-                  <ShoppingCartIcon />
-                </StyledBadge>
+            <>
+              <MenuButton iconType={ShoppingCartIcon} type={'cart'} content={props.cart.inventory} />
+              <IconButton color="inherit" aria-label="add to shopping cart" component={Link} to={'/cart'}>
+                <ExitToAppIcon/>
               </IconButton>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
+              <MenuButton iconType={AccountCircleIcon} type={'menu'} content={['Profile','My account', 'Logout']}/>
+            </>
           )}
+          </div>
           <div onClick={handleLogin}>
             {auth ? "Logout" : "Login"}
           </div>
@@ -115,4 +69,4 @@ const mapStateToProps = state => ({
   cart: state.cart
 })
 
-export default connect(mapStateToProps)(Header); 
+export default withRouter(connect(mapStateToProps)(Header)); 
